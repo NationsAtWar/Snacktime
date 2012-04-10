@@ -1,0 +1,20 @@
+name: Snacktime
+main: org.nationsatwar.snacktime.Snacktime
+version: 0.1
+
+commands:
+  snacktime:
+    description: Resets the cookie timer.
+    usage: /snacktime
+  cookie:
+    description: Gives you a cookie. Sometimes.
+    usage: /cookie
+    
+permissions:
+    nations.cookie:
+        description: Allows access to cookie command.
+        default: op
+    nations.cookieadmin:
+        description: Resets the cookie timer.
+        default: op
+        
