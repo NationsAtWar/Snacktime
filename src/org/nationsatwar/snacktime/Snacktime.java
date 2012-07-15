@@ -43,16 +43,7 @@ public class Snacktime extends JavaPlugin implements Listener {
 		if(sender instanceof Player) {
 			player = (Player) sender;
 		}
-		if(cmd.getName().equalsIgnoreCase("snacktime")) {
-			if((player != null && player.hasPermission("nations.cookieadmin")) || player == null) {
-				this.clearAllCooldowns();
-				this.messageAll("It's snacktime!");
-				this.sendToLog("Snacktime initiated.");
-				return true;
-			} else {
-				return false;
-			}
-		}
+		
 		if(player == null) {
 			sender.sendMessage(ChatColor.RED + "You can't eat snacks!");
 			return false;
@@ -60,6 +51,17 @@ public class Snacktime extends JavaPlugin implements Listener {
 		if(!this.snacktime) {
 			player.sendMessage(ChatColor.RED + "It's not snacktime.");
 			return false;
+		}
+		
+		if(cmd.getName().equalsIgnoreCase("snacktime")) {
+			if((player != null && player.hasPermission("nations.cookieadmin")) || player == null) {
+				this.clearAllCooldowns();
+				this.messageAll("It's snacktime!");
+				this.sendToLog("Snacktime initiated.");
+			} else {
+				player.sendMessage(ChatColor.RED + "Sorry, you do not have permission to initiate snacktime.");
+			}
+			return true;
 		}
 		
 		if(cmd.getName().equalsIgnoreCase("cookie")) {
@@ -78,8 +80,8 @@ public class Snacktime extends JavaPlugin implements Listener {
 				}
 			} else {
 				player.sendMessage(ChatColor.RED + "No cookies for you.");
-				return false;
 			}
+			return true;
 		}
 
 		/*if(cmd.getName().equalsIgnoreCase("milk")) {

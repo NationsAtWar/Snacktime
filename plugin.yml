@@ -5,10 +5,10 @@ version: 0.1
 commands:
   snacktime:
     description: Resets the cookie timer.
-    usage: /snacktime
+    usage: /snacktime to reset the cookie timer.
   cookie:
     description: Gives you a cookie. Sometimes.
-    usage: /cookie
+    usage: /cookie to receive a cookie.
     
 permissions:
     nations.cookie:
