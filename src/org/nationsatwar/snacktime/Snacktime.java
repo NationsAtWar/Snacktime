@@ -21,6 +21,7 @@ public class Snacktime extends JavaPlugin implements Listener {
 	private static final Logger log = Logger.getLogger("Minecraft");
 	private boolean snacktime = true;
 	private HashMap<String, Date> cookietime = new HashMap<String, Date>();
+	private String cookieOutput;		// string to concatenate cookies and milk output. 
 	
 	public String getVersion() {
 		return "0.1";
@@ -70,10 +71,14 @@ public class Snacktime extends JavaPlugin implements Listener {
 				int max = 1200*1000;
 				int cooltime = min + (int)(Math.random() * ((max - min) + 1));
 				if(checkCooldown(player.getName(), cooltime)) {
-					player.getInventory().addItem(new ItemStack(Material.COOKIE, 1));
-					if(Math.random() > .85) {
+					cookieOutput = "You have received ";
+					if(Math.random() > .95) {
 						player.getInventory().addItem(new ItemStack(Material.MILK_BUCKET, 1));
+						cookieOutput =  cookieOutput + "some milk and ";
 					}
+					player.getInventory().addItem(new ItemStack(Material.COOKIE, 1));
+					cookieOutput =  cookieOutput + "a cookie.";
+					player.sendMessage(ChatColor.RED + cookieOutput);
 					player.playEffect(player.getLocation(), Effect.POTION_BREAK, 0);
 				} else {
 					player.sendMessage(ChatColor.RED + "You had snacks too recently. You'll ruin your dinner.");
@@ -83,16 +88,6 @@ public class Snacktime extends JavaPlugin implements Listener {
 			}
 			return true;
 		}
-
-		/*if(cmd.getName().equalsIgnoreCase("milk")) {
-			if(player.hasPermission("nations.milk")) {
-				player.getInventory().addItem(new ItemStack(Material.MILK_BUCKET, 1));
-				player.playEffect(player.getLocation(), Effect.POTION_BREAK, 0);
-			} else {
-				player.sendMessage("No milk for you.");
-				return false;
-			}
-		}*/
 		return false;
 	}
 	
@@ -134,3 +129,4 @@ public class Snacktime extends JavaPlugin implements Listener {
 		}
 	}
 }
+
